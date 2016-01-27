@@ -1,0 +1,11 @@
+SELECT
+v_jawaban_group_mk.kode_prodi,
+v_jawaban_group_mk.nama_prodi,
+v_jawaban_group_mk.tot_mahasiswa,
+COUNT(*) as tot_mahasiswa_isi,
+v_jawaban_group_mk.tot_mahasiswa-COUNT(*) as tot_mahasiswa_tdk_isi,
+v_jawaban_group_mk.kode_matakuliah,
+v_jawaban_group_mk.nama_matakuliah
+FROM
+v_jawaban_group_mk
+GROUP BY kode_matakuliah

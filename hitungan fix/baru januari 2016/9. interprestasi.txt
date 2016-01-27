@@ -1,0 +1,22 @@
+SELECT
+v_jawaban_group_mk.nama_prodi,
+v_jawaban_group_mk.kode_prodi,
+v_jawaban_group_mk.kode_matakuliah,
+v_jawaban_group_mk.kelas,
+v_jawaban_group_mk.tot_mahasiswa,
+v_jawaban_group_mk.tot_mhs_isi,
+v_jawaban_group_mk.tot_mhs_tdk_isi,
+v_jawaban_group_mk.tot_mahasiswa * 5 AS skort_tinggi,
+v_jawaban_group_mk.tot_mahasiswa * 1 AS skort_rendah,
+v_skort.JmlSkor,
+round(v_skort.JmlSkor/(v_jawaban_group_mk.tot_mahasiswa * 5)*100,2) AS PresentaseIndex,
+CASE 
+WHEN (round(v_skort.JmlSkor/(v_jawaban_group_mk.tot_mahasiswa * 5)*100,2)) >= 0  AND (round(v_skort.JmlSkor/(v_jawaban_group_mk.tot_mahasiswa * 5)*100,2)) <= 20 THEN "Sangat Tidak Sesuai"
+WHEN (round(v_skort.JmlSkor/(v_jawaban_group_mk.tot_mahasiswa * 5)*100,2)) >= 21  AND (round(v_skort.JmlSkor/(v_jawaban_group_mk.tot_mahasiswa * 5)*100,2)) <= 40 THEN "Tidak Sesuai"
+WHEN (round(v_skort.JmlSkor/(v_jawaban_group_mk.tot_mahasiswa * 5)*100,2)) >= 41  AND (round(v_skort.JmlSkor/(v_jawaban_group_mk.tot_mahasiswa * 5)*100,2)) <= 60 THEN "Moderat"
+WHEN (round(v_skort.JmlSkor/(v_jawaban_group_mk.tot_mahasiswa * 5)*100,2)) >= 61  AND (round(v_skort.JmlSkor/(v_jawaban_group_mk.tot_mahasiswa * 5)*100,2)) <= 80 THEN "Sesuai"
+WHEN (round(v_skort.JmlSkor/(v_jawaban_group_mk.tot_mahasiswa * 5)*100,2)) >= 81  AND (round(v_skort.JmlSkor/(v_jawaban_group_mk.tot_mahasiswa * 5)*100,2)) <= 100 THEN "Sangat Sesuai"
+END AS keterangan
+FROM
+v_jawaban_group_mk
+INNER JOIN v_skort ON v_jawaban_group_mk.kode_matakuliah = v_skort.kode_matakuliah AND v_jawaban_group_mk.kelas = v_skort.kelas

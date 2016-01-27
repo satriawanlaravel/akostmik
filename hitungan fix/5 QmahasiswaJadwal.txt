@@ -1,0 +1,17 @@
+SELECT
+prodi.kode_prodi,
+prodi.nama_prodi,
+COUNT(*) AS tot_mahasiswa,
+matakuliah.kode_matakuliah,
+matakuliah.nama_matakuliah
+FROM
+jadwal
+INNER JOIN kelas ON kelas.idkelas = jadwal.idkelas
+INNER JOIN krs ON krs.id_krs = jadwal.id_krs
+INNER JOIN ruangan ON ruangan.kode_ruangan = jadwal.kode_ruangan
+INNER JOIN dosen ON dosen.nik = jadwal.nik
+INNER JOIN mahasiswa ON mahasiswa.nim = krs.nim
+INNER JOIN matakuliah ON matakuliah.kode_matakuliah = krs.kode_matakuliah
+INNER JOIN prodi ON prodi.kode_prodi = mahasiswa.kode_prodi AND prodi.kode_prodi = matakuliah.kode_prodi
+ 
+GROUP BY kode_matakuliah, kode_prodi

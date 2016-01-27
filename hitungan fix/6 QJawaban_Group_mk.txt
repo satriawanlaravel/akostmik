@@ -1,0 +1,12 @@
+SELECT
+v_jawaban_jml.kode_prodi,
+v_jawaban_jml.nama_prodi,
+v_mahasiswa_jadwal.tot_mahasiswa,
+v_jawaban_jml.nama_matakuliah,
+v_jawaban_jml.kode_matakuliah
+
+FROM
+v_jawaban_jml
+INNER JOIN v_mahasiswa_jadwal ON v_jawaban_jml.kode_matakuliah = v_mahasiswa_jadwal.kode_matakuliah
+
+GROUP BY v_jawaban_jml.nim,kode_matakuliah

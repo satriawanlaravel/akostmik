@@ -1,0 +1,22 @@
+SELECT
+(SELECT COUNT(*) from pertanyaan) AS tot_pertanyaan,
+CASE
+WHEN jawabanganda = '1' THEN '1' ELSE '0'
+END AS s1,
+CASE
+WHEN jawabanganda = '2' THEN '2' ELSE '0'
+END AS s2,
+CASE
+WHEN jawabanganda = '3' THEN '3' ELSE '0'
+END AS s3,
+CASE
+WHEN jawabanganda = '4' THEN '4' ELSE '0'
+END AS s4,
+CASE
+WHEN jawabanganda = '5' THEN '5' ELSE '0'
+END AS s5,
+v_master_data.*
+FROM
+v_master_data
+ORDER BY
+nim,kode_jawaban,kode_pertanyaan ASC

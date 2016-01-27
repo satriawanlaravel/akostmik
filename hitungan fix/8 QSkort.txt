@@ -1,0 +1,26 @@
+SELECT
+count(if((Rata_rata='1'),Rata_rata,NULL)) AS Klp1,
+count(if((Rata_rata='2'),Rata_rata,NULL)) AS Klp2,
+count(if((Rata_rata='3'),Rata_rata,NULL)) AS Klp3,
+count(if((Rata_rata='4'),Rata_rata,NULL)) AS Klp4,
+count(if((Rata_rata='5'),Rata_rata,NULL)) AS Klp5,
+
+count(if((Rata_rata='1'),Rata_rata,NULL)) * 1 AS Skor1,
+count(if((Rata_rata='2'),Rata_rata,NULL)) * 2 AS Skor2,
+count(if((Rata_rata='3'),Rata_rata,NULL)) * 3 AS Skor3,
+count(if((Rata_rata='4'),Rata_rata,NULL)) * 4 AS Skor4,
+count(if((Rata_rata='5'),Rata_rata,NULL)) * 5 AS Skor5,
+
+(count(if((Rata_rata='1'),Rata_rata,NULL)) * 1) +
+(count(if((Rata_rata='2'),Rata_rata,NULL)) * 2) +
+(count(if((Rata_rata='3'),Rata_rata,NULL)) * 3) +
+(count(if((Rata_rata='4'),Rata_rata,NULL)) * 4) +
+(count(if((Rata_rata='5'),Rata_rata,NULL)) * 5) AS JmlSkor,
+
+kode_matakuliah,
+nama_matakuliah
+FROM
+v_jawaban_jml
+GROUP BY kode_matakuliah,kode_prodi
+
+

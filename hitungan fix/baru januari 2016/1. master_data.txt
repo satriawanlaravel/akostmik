@@ -1,0 +1,53 @@
+SELECT
+jawaban.kode_jawaban,
+jawaban.jawabanganda,
+jawaban.tanggal_pengisian,
+jawaban.kritiksaran,
+pertanyaan.pertanyaan,
+krs.semester,
+kelas.kelas,
+ruangan.nama_ruangan,
+dosen.nama_dosen,
+mahasiswa.nama_mahasiswa,
+matakuliah.nama_matakuliah,
+prodi.nama_prodi,
+prodi.kode_prodi,
+matakuliah.kode_matakuliah,
+mahasiswa.nim,
+krs.id_krs,
+mahasiswa.angkatan,
+mahasiswa.agama,
+mahasiswa.jenis_kelamin,
+mahasiswa.telepon,
+mahasiswa.alamat,
+mahasiswa.tanggal_lahir,
+mahasiswa.tempat_lahir,
+prodi.jurusan,
+prodi.jenjang,
+matakuliah.sks_teori,
+matakuliah.sks_praktek,
+dosen.alamat_email,
+dosen.status_dosen,
+dosen.alumni,
+dosen.field_studi,
+dosen.nik,
+ruangan.kode_ruangan,
+kelas.idkelas,
+krs.status_krs,
+jadwal.tahun_ajaran,
+jadwal.gangep,
+jadwal.idjadwal,
+pertanyaan.kode_pertanyaan
+FROM
+jawaban
+INNER JOIN jadwal ON jadwal.idjadwal = jawaban.idjadwal
+INNER JOIN pertanyaan ON pertanyaan.kode_pertanyaan = jawaban.kode_pertanyaan
+INNER JOIN krs ON krs.id_krs = jadwal.id_krs
+INNER JOIN kelas ON kelas.idkelas = jadwal.idkelas
+INNER JOIN ruangan ON ruangan.kode_ruangan = jadwal.kode_ruangan
+INNER JOIN dosen ON dosen.nik = jadwal.nik
+INNER JOIN mahasiswa ON mahasiswa.nim = krs.nim
+INNER JOIN matakuliah ON matakuliah.kode_matakuliah = krs.kode_matakuliah
+INNER JOIN prodi ON prodi.kode_prodi = matakuliah.kode_prodi AND prodi.kode_prodi = mahasiswa.kode_prodi
+
+ORDER BY nim, kode_pertanyaan

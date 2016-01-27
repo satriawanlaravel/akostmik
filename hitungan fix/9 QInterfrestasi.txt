@@ -1,0 +1,28 @@
+SELECT
+v_mahasiswa_jadwal.kode_prodi,
+v_mahasiswa_jadwal.nama_prodi,
+v_mahasiswa_jadwal.kode_matakuliah,
+v_mahasiswa_jadwal.nama_matakuliah,
+v_jawaban_isi.tot_mahasiswa,
+v_jawaban_isi.tot_mahasiswa_isi,
+v_jawaban_isi.tot_mahasiswa_tdk_isi,
+v_skor.Klp1,
+v_skor.Klp2,
+v_skor.Klp3,
+v_skor.Klp4,
+v_skor.Klp5,
+v_skor.Skor1,
+v_skor.Skor2,
+v_skor.Skor3,
+v_skor.Skor4,
+v_skor.Skor5,
+v_skor.JmlSkor,
+v_jawaban_isi.tot_mahasiswa*5 AS jmlInSkorTinggi,
+v_jawaban_isi.tot_mahasiswa*1 AS jmlInSkorRendah,
+round(v_skor.JmlSkor/(v_jawaban_isi.tot_mahasiswa*5)*100,2) AS PresentaseIndex
+FROM
+v_mahasiswa_jadwal
+INNER JOIN v_jawaban_group_mk ON v_mahasiswa_jadwal.kode_matakuliah = v_jawaban_group_mk.kode_matakuliah
+INNER JOIN v_jawaban_isi ON v_jawaban_group_mk.kode_matakuliah = v_jawaban_isi.kode_matakuliah
+INNER JOIN v_skor ON v_jawaban_isi.kode_matakuliah = v_skor.kode_matakuliah
+GROUP BY kode_matakuliah

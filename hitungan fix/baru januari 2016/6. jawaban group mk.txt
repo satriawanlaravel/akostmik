@@ -1,0 +1,11 @@
+SELECT
+v_jawaban_jml.nama_prodi,
+v_jawaban_jml.kode_prodi,
+v_jawaban_jml.kode_matakuliah,
+v_jawaban_jml.kelas,
+v_mahasiswa_jadwal.tot_mahasiswa,
+v_jawaban_jml.tot_mhs_isi,
+v_mahasiswa_jadwal.tot_mahasiswa - v_jawaban_jml.tot_mhs_isi AS tot_mhs_tdk_isi
+FROM
+v_mahasiswa_jadwal
+INNER JOIN v_jawaban_jml ON v_mahasiswa_jadwal.kode_prodi = v_jawaban_jml.kode_prodi AND v_mahasiswa_jadwal.nama_prodi = v_jawaban_jml.nama_prodi AND v_mahasiswa_jadwal.kode_matakuliah = v_jawaban_jml.kode_matakuliah AND v_mahasiswa_jadwal.kelas = v_jawaban_jml.kelas
